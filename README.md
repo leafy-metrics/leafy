@@ -1,4 +1,18 @@
+[gem]: https://rubygems.org/gems/metrics-core
+[travis]: https://travis-ci.org/mkristian/metrics-core
+[gemnasium]: https://gemnasium.com/mkristian/metrics-core
+[codeclimate]: https://codeclimate.com/github/mkristian/metrics-core
+[coveralls]: https://coveralls.io/r/mkristian/metrics-core
+[codeissues]: https://codeclimate.com/github/mkristian/metrics-core
+
 # Port of Dropwizard Metrics-Core
+
+[![Gem Version](https://badge.fury.io/rb/metrics-code.svg)][gem]
+[![Build Status](https://travis-ci.org/mkristian/metrics-core.svg?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/badges/github.com/mkristian/metrics-core.svg)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/mkristian/metrics-core/badges/gpa.svg)][codeclimate]
+[![Test Coverage](https://codeclimate.com/github/mkristian/metrics-core/badges/coverage.svg)][coveralls]
+[![Issue Count](https://codeclimate.com/github/mkristian/metrics-core/badges/issue_count.svg)][codeissues]
 
 This is literal port of [http://metrics.dropwizard.io/3.1.0/](http://metrics.dropwizard.io/3.1.0/). as the naming convention of Java is slightly different some internal variable names still following the Java naming convention. all public method names are using Ruby naming conventions.
 
