@@ -1,4 +1,3 @@
-
 # An abstraction for how time passes. It is passed to {@link Timer} to track timing.
 module Metrics
   module Core

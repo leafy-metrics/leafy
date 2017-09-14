@@ -12,7 +12,7 @@ module Metrics
       #
       # @param size the number of measurements to store
       def initialize(size)
-        super()
+        super() # for cheap_lockable
         @measurements = Array.new size
         @count = 0
       end

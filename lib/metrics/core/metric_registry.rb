@@ -1,4 +1,9 @@
 require 'concurrent/map'
+require_relative 'ratio_gauge'
+require_relative 'counter'
+require_relative 'meter'
+require_relative 'histogram'
+require_relative 'timer'
 
 module Metrics
   module Core
@@ -33,6 +38,16 @@ module Metrics
           raise ArgumentError.new("A metric named #{name} already exists")
         end
         metric
+      end
+
+      # Return the {@link Gauge} registered under this name or create and register
+      # a new {@link Gauge} if none is registered.
+      #
+      # @param name the name of the metric
+      # @param supplier a Builder that can be used to manufacture a Gauge
+      # @return a new or pre-existing {@link Gauge}
+      def gauge(name, builder)
+        getOrAdd(name, builder)
       end
 
       # Return the {@link Counter} registered under this name or create and register
@@ -88,6 +103,13 @@ module Metrics
         @metrics.keys.dup.freeze
       end
 
+      # Returns a map of all the gauges in the registry and their names.
+      #
+      # @return all the gauges in the registry
+      def gauges
+        metrics(Gauge)
+      end
+
       # Returns a map of all the counters in the registry and their names.
       #
       # @return all the counters in the registry
@@ -124,18 +146,19 @@ module Metrics
           end
           result.freeze
         else
-          @metrics.dup.freeze
+          Hash[@metrics.keys.zip(@metrics.values)].freeze
         end
       end
       
       # A quick and easy way of capturing the notion of default metrics.
       class Builder
-        def initialize(klass)
+        def initialize(klass, &block)
           @klass = klass
+          @block = (block || klass.method(:new))
         end
 
         def new_metric
-          @klass.new
+          @block.call
         end
 
         def instance?(metric)

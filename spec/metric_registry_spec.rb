@@ -14,35 +14,32 @@ RSpec.describe Metrics::Core::MetricRegistry do
 
   let(:registry) { subject }
 
-  let(:gauge) { }
+  let(:gauge) { MetricMock.new(Metrics::Core::Gauge) }
   let(:counter) { MetricMock.new(Metrics::Core::Counter) }
   let(:timer) { MetricMock.new(Metrics::Core::Timer) }
   let(:histogram) { MetricMock.new(Metrics::Core::Histogram) }
   let(:meter) { MetricMock.new(Metrics::Core::Meter) }
 
-  # it 'registeringAGaugeTriggersANotification' do
-  #   expect(registry.register("thing", gauge)).to eq gauge
+  it 'registeringAGaugeTriggersANotification' do
+     expect(registry.register("thing", gauge)).to eq gauge
 
-  #   #     verify(listener).onGaugeAdded("thing", gauge);
-  # end
+     #     verify(listener).onGaugeAdded("thing", gauge);
+  end
 
-  
-  # it 'removingAGaugeTriggersANotification' do
-  #   registry.register("thing", gauge);
+  it 'removingAGaugeTriggersANotification' do
+     registry.register("thing", gauge);
 
-  #   expect(registry.remove("thing")).to eq true
+     expect(registry.remove("thing")).to eq true
 
-  #   #      verify(listener).onGaugeRemoved("thing");
-  # end
+     #      verify(listener).onGaugeRemoved("thing");
+  end
 
-  
   it 'registeringACounterTriggersANotification' do
     expect(registry.register("thing", counter)).to eq counter
 
     #       verify(listener).onCounterAdded("thing", counter);
   end
 
-  
   it 'accessingACounterRegistersAndReusesTheCounter' do
     counter1 = registry.counter("thing");
     counter2 = registry.counter("thing");
@@ -52,8 +49,6 @@ RSpec.describe Metrics::Core::MetricRegistry do
     #        verify(listener).onCounterAdded("thing", counter1);
   end
 
-
-  
   it 'removingACounterTriggersANotification' do
     registry.register("thing", counter);
 
@@ -62,13 +57,11 @@ RSpec.describe Metrics::Core::MetricRegistry do
     #      verify(listener).onCounterRemoved("thing");
   end
 
-  
   it 'registeringAHistogramTriggersANotification' do
     expect(registry.register("thing", histogram)).to eq histogram
 
     #       verify(listener).onHistogramAdded("thing", histogram);
   end
-
   
   it 'accessingAHistogramRegistersAndReusesIt' do
     histogram1 = registry.histogram("thing");
@@ -78,7 +71,6 @@ RSpec.describe Metrics::Core::MetricRegistry do
 
     #        verify(listener).onHistogramAdded("thing", histogram1);
   end
-
   
   it 'removingAHistogramTriggersANotification' do
     registry.register("thing", histogram);
@@ -87,14 +79,12 @@ RSpec.describe Metrics::Core::MetricRegistry do
 
     #      verify(listener).onHistogramRemoved("thing");
   end
-
   
   it 'registeringAMeterTriggersANotification' do
     expect(registry.register("thing", meter)).to eq meter
 
     #       verify(listener).onMeterAdded("thing", meter);
   end
-
   
   it 'accessingAMeterRegistersAndReusesIt' do
     meter1 = registry.meter("thing");
@@ -104,7 +94,6 @@ RSpec.describe Metrics::Core::MetricRegistry do
 
     #        verify(listener).onMeterAdded("thing", meter1);
   end
-
   
   it 'removingAMeterTriggersANotification' do
     registry.register("thing", meter);
@@ -113,14 +102,12 @@ RSpec.describe Metrics::Core::MetricRegistry do
 
     #     verify(listener).onMeterRemoved("thing");
   end
-
   
   it 'registeringATimerTriggersANotification' do
     expect(registry.register("thing", timer)).to eq timer
 
     #      verify(listener).onTimerAdded("thing", timer);
   end
-
   
   it 'accessingATimerRegistersAndReusesIt' do
     timer1 = registry.timer("thing");
@@ -130,9 +117,6 @@ RSpec.describe Metrics::Core::MetricRegistry do
 
     #       verify(listener).onTimerAdded("thing", timer1);
   end
-
-  
-
   
   it 'removingATimerTriggersANotification' do
     registry.register("thing", timer);
@@ -141,37 +125,30 @@ RSpec.describe Metrics::Core::MetricRegistry do
 
     #        verify(listener).onTimerRemoved("thing");
   end
-
-
-
   
-  # it 'hasAMapOfRegisteredGauges' do
-  #     registry.register("gauge", gauge);
+  it 'hasAMapOfRegisteredGauges' do
+    registry.register("gauge", gauge)
 
-  #     expect(registry.gauges['gauge']).to eq gauge
-  # end
-
+    expect(registry.gauges['gauge']).to eq gauge
+  end
   
   it 'hasAMapOfRegisteredCounters' do
     registry.register("counter", counter);
 
     expect(registry.counters['counter']).to eq counter
   end
-
   
   it 'hasAMapOfRegisteredHistograms' do
     registry.register("histogram", histogram);
 
     expect(registry.histograms['histogram']).to eq histogram
   end
-
   
   it 'hasAMapOfRegisteredMeters' do
     registry.register("meter", meter);
 
     expect(registry.meters['meter']).to eq meter
   end
-
   
   it 'hasAMapOfRegisteredTimers' do
     registry.register("timer", timer);
@@ -179,7 +156,6 @@ RSpec.describe Metrics::Core::MetricRegistry do
     expect(registry.timers['timer']).to eq timer
   end
 
-  
   it 'hasASetOfRegisteredMetricNames' do
     registry.register("gauge", gauge);
     registry.register("counter", counter);
@@ -189,5 +165,4 @@ RSpec.describe Metrics::Core::MetricRegistry do
 
     expect(registry.names).to match_array ["gauge", "counter", "histogram", "meter", "timer"]
   end
-
 end
