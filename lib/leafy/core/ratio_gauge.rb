@@ -3,7 +3,7 @@ require_relative 'gauge'
 # A gauge which measures the ratio of one value to another.
 #
 # If the denominator is zero, not a number, or infinite, the resulting ratio is not a number.
-module Metrics
+module Leafy
   module Core
     class RatioGauge < Gauge
 

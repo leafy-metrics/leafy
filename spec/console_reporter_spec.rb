@@ -1,18 +1,18 @@
-require 'metrics/core/console_reporter'
+require 'leafy/core/console_reporter'
 
-RSpec.describe Metrics::Core::ConsoleReporter do
+RSpec.describe Leafy::Core::ConsoleReporter do
 
   let(:output) { StringIO.new }
-  let(:registry) { double(Metrics::Core::MetricRegistry) }
+  let(:registry) { double(Leafy::Core::MetricRegistry) }
 
   let(:clock) do
-    clock = double(Metrics::Core::Clock)
+    clock = double(Leafy::Core::Clock)
     allow(clock).to receive(:time).and_return(1363568676000)
     clock
   end
 
   let(:reporter) do
-    Metrics::Core::ConsoleReporter::Builder
+    Leafy::Core::ConsoleReporter::Builder
       .for_registry(registry)
       .output_to(output)
       .with_clock(clock)
@@ -20,7 +20,7 @@ RSpec.describe Metrics::Core::ConsoleReporter do
   end
   
   it 'reportsGaugeValues' do
-    gauge = Metrics::Core::Gauge.new { 1 }
+    gauge = Leafy::Core::Gauge.new { 1 }
 
     reporter.do_report({"gauge" => gauge},
                     {},
@@ -42,7 +42,7 @@ RSpec.describe Metrics::Core::ConsoleReporter do
 
 
   it 'reportsCounterValues' do
-    counter = double(Metrics::Core::Counter.class)
+    counter = double(Leafy::Core::Counter.class)
     allow(counter).to receive(:count).and_return(100)
 
     reporter.do_report({},
@@ -65,10 +65,10 @@ RSpec.describe Metrics::Core::ConsoleReporter do
 
 
   it 'reportsHistogramValues' do
-    histogram = double(Metrics::Core::Histogram.class)
+    histogram = double(Leafy::Core::Histogram.class)
     allow(histogram).to receive(:count).and_return(1)
 
-    snapshot = double(Metrics::Core::Snapshot.class)
+    snapshot = double(Leafy::Core::Snapshot.class)
     allow(snapshot).to receive(:max).and_return(2)
     allow(snapshot).to receive(:mean).and_return(3.0)
     allow(snapshot).to receive(:min).and_return(4)
@@ -112,7 +112,7 @@ RSpec.describe Metrics::Core::ConsoleReporter do
 
 
   it 'reportsMeterValues' do
-    meter = double(Metrics::Core::Meter.class)
+    meter = double(Leafy::Core::Meter.class)
     allow(meter).to receive(:count).and_return(1)
     allow(meter).to receive(:mean_rate).and_return(2.0)
     allow(meter).to receive(:one_minute_rate).and_return(3.0)
@@ -143,14 +143,14 @@ RSpec.describe Metrics::Core::ConsoleReporter do
 
 
   it 'reportsTimerValues' do
-    timer = double(Metrics::Core::Timer.class)
+    timer = double(Leafy::Core::Timer.class)
     allow(timer).to receive(:count).and_return(1)
     allow(timer).to receive(:mean_rate).and_return(2.0)
     allow(timer).to receive(:one_minute_rate).and_return(3.0)
     allow(timer).to receive(:five_minute_rate).and_return(4.0)
     allow(timer).to receive(:fifteen_minute_rate).and_return(5.0)
 
-    snapshot = double(Metrics::Core::Snapshot.class)
+    snapshot = double(Leafy::Core::Snapshot.class)
     allow(snapshot).to receive(:max).and_return(100000000)
     allow(snapshot).to receive(:mean).and_return(200000000.0)
     allow(snapshot).to receive(:min).and_return(300000000.0)

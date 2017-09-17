@@ -1,9 +1,9 @@
-require 'metrics/core/meter'
+require 'leafy/core/meter'
 
-RSpec.describe Metrics::Core::Meter do
+RSpec.describe Leafy::Core::Meter do
 
   let(:clock) do
-    clock = Metrics::Core::Clock.new
+    clock = Leafy::Core::Clock.new
     def clock.tick      
       @ticks ||= [0, 0] + [10000000000] * 10
       @ticks.shift
@@ -11,7 +11,7 @@ RSpec.describe Metrics::Core::Meter do
     clock
   end
 
-  let(:meter) {  Metrics::Core::Meter.new(clock) }
+  let(:meter) {  Leafy::Core::Meter.new(clock) }
 
   it 'starts out with no rates or count' do
     expect(meter.count).to eq 0

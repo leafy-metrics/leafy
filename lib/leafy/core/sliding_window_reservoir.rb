@@ -3,7 +3,7 @@ require 'concurrent/thread_safe/util/cheap_lockable'
 
 # A {@link Reservoir} implementation backed by a sliding window that stores the last {@code N}
 # measurements.
-module Metrics
+module Leafy
   module Core
     class SlidingWindowReservoir
       include Concurrent::ThreadSafe::Util::CheapLockable

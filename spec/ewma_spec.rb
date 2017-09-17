@@ -1,9 +1,9 @@
-require 'metrics/core/ewma'
+require 'leafy/core/ewma'
 
-RSpec.describe Metrics::Core::EWMA do
+RSpec.describe Leafy::Core::EWMA do
 
   it 'a one minute EWMA with a value of three' do
-    ewma = Metrics::Core::EWMA.oneMinuteEWMA
+    ewma = Leafy::Core::EWMA.oneMinuteEWMA
     ewma.update(3)
     ewma.tick
 
@@ -71,7 +71,7 @@ RSpec.describe Metrics::Core::EWMA do
   end
 
   it 'a five minute EWMA with a value of three' do
-    ewma = Metrics::Core::EWMA.fiveMinuteEWMA
+    ewma = Leafy::Core::EWMA.fiveMinuteEWMA
     ewma.update(3)
     ewma.tick
 
@@ -139,7 +139,7 @@ RSpec.describe Metrics::Core::EWMA do
   end
 
   it 'a fifteen minute EWMA with a value of three' do
-    ewma = Metrics::Core::EWMA.fifteenMinuteEWMA
+    ewma = Leafy::Core::EWMA.fifteenMinuteEWMA
     ewma.update(3)
     ewma.tick
 

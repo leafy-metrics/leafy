@@ -1,6 +1,6 @@
 require 'concurrent/thread_safe/util/adder'
 
-module Metrics
+module Leafy
   module Core
     class Adder < Concurrent::ThreadSafe::Util::Adder
       

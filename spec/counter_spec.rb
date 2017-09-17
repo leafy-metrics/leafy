@@ -1,6 +1,6 @@
-require 'metrics/core/counter'
+require 'leafy/core/counter'
 
-RSpec.describe Metrics::Core::Counter do
+RSpec.describe Leafy::Core::Counter do
 
   it 'starts at zero' do
     expect(subject.count).to eq 0

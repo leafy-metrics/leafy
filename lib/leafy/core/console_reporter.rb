@@ -1,6 +1,6 @@
 require_relative 'scheduled_reporter'
 require_relative 'clock'
-module Metrics
+module Leafy
   module Core
     class ConsoleReporter < ScheduledReporter
 

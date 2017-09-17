@@ -7,7 +7,7 @@ require 'concurrent/atomic/atomic_fixnum'
 # exponentially-weighted moving average throughputs.
 #
 # @see EWMA
-module Metrics
+module Leafy
   module Core
     class Meter
 

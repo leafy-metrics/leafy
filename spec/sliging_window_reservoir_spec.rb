@@ -1,8 +1,8 @@
-require 'metrics/core/sliding_window_reservoir'
+require 'leafy/core/sliding_window_reservoir'
 
-RSpec.describe Metrics::Core::SlidingWindowReservoir do
+RSpec.describe Leafy::Core::SlidingWindowReservoir do
 
-  let(:reservoir) {  Metrics::Core::SlidingWindowReservoir.new(3) }
+  let(:reservoir) {  Leafy::Core::SlidingWindowReservoir.new(3) }
 
   it 'handles small data streams' do
     reservoir.update(1)

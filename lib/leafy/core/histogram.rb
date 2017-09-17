@@ -1,6 +1,6 @@
 require 'concurrent/thread_safe/util/adder'
 
-module Metrics
+module Leafy
   module Core
 
     # A metric which calculates the distribution of a value.

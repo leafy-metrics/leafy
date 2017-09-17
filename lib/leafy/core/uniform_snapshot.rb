@@ -1,7 +1,7 @@
 require_relative 'snapshot'
 
 # A statistical snapshot of a {@link UniformSnapshot}. 
-module Metrics
+module Leafy
   module Core
     class UniformSnapshot < Snapshot
 

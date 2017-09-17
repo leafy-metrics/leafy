@@ -1,6 +1,6 @@
-require 'metrics/core/metric_registry'
+require 'leafy/core/metric_registry'
 
-RSpec.describe Metrics::Core::MetricRegistry do
+RSpec.describe Leafy::Core::MetricRegistry do
 
   class MetricMock
 
@@ -14,11 +14,11 @@ RSpec.describe Metrics::Core::MetricRegistry do
 
   let(:registry) { subject }
 
-  let(:gauge) { MetricMock.new(Metrics::Core::Gauge) }
-  let(:counter) { MetricMock.new(Metrics::Core::Counter) }
-  let(:timer) { MetricMock.new(Metrics::Core::Timer) }
-  let(:histogram) { MetricMock.new(Metrics::Core::Histogram) }
-  let(:meter) { MetricMock.new(Metrics::Core::Meter) }
+  let(:gauge) { MetricMock.new(Leafy::Core::Gauge) }
+  let(:counter) { MetricMock.new(Leafy::Core::Counter) }
+  let(:timer) { MetricMock.new(Leafy::Core::Timer) }
+  let(:histogram) { MetricMock.new(Leafy::Core::Histogram) }
+  let(:meter) { MetricMock.new(Leafy::Core::Meter) }
 
   it 'registeringAGaugeTriggersANotification' do
      expect(registry.register("thing", gauge)).to eq gauge

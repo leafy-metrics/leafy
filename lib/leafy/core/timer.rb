@@ -2,7 +2,7 @@ require_relative 'clock'
 require_relative 'meter'
 require_relative 'histogram'
 
-module Metrics
+module Leafy
   module Core
 
     # A timer metric which aggregates timing durations and provides duration statistics, plus

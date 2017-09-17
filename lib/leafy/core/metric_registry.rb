@@ -5,7 +5,7 @@ require_relative 'meter'
 require_relative 'histogram'
 require_relative 'timer'
 
-module Metrics
+module Leafy
   module Core
 
     # A registry of metric instances.

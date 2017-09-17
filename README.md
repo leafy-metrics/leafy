@@ -1,18 +1,18 @@
-[gem]: https://rubygems.org/gems/metrics-core
-[travis]: https://travis-ci.org/mkristian/metrics-core
-[gemnasium]: https://gemnasium.com/mkristian/metrics-core
-[codeclimate]: https://codeclimate.com/github/mkristian/metrics-core
-[coveralls]: https://coveralls.io/r/mkristian/metrics-core
-[codeissues]: https://codeclimate.com/github/mkristian/metrics-core
+[gem]: https://rubygems.org/gems/leafy
+[travis]: https://travis-ci.org/leafy-metrics/leafy
+[gemnasium]: https://gemnasium.com/leafy-metrics/leafy
+[codeclimate]: https://codeclimate.com/github/leafy-metrics/leafy
+[coveralls]: https://coveralls.io/r/leafy-metrics/leafy
+[codeissues]: https://codeclimate.com/github/leafy-metrics/leafy
 
 # Port of Dropwizard Metrics-Core
 
 [![Gem Version](https://badge.fury.io/rb/metrics-code.svg)][gem]
-[![Build Status](https://travis-ci.org/mkristian/metrics-core.svg?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/badges/github.com/mkristian/metrics-core.svg)][gemnasium]
-[![Code Climate](https://codeclimate.com/github/mkristian/metrics-core/badges/gpa.svg)][codeclimate]
-[![Test Coverage](https://codeclimate.com/github/mkristian/metrics-core/badges/coverage.svg)][coveralls]
-[![Issue Count](https://codeclimate.com/github/mkristian/metrics-core/badges/issue_count.svg)][codeissues]
+[![Build Status](https://travis-ci.org/leafy-metrics/leafy.svg?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/badges/github.com/leafy-metrics/leafy.svg)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/leafy-metrics/leafy/badges/gpa.svg)][codeclimate]
+[![Test Coverage](https://codeclimate.com/github/leafy-metrics/leafy/badges/coverage.svg)][coveralls]
+[![Issue Count](https://codeclimate.com/github/leafy-metrics/leafy/badges/issue_count.svg)][codeissues]
 
 This is literal port of [http://metrics.dropwizard.io/3.1.0/](http://metrics.dropwizard.io/3.1.0/). as the naming convention of Java is slightly different some internal variable names still following the Java naming convention. all public method names are using Ruby naming conventions.
 
@@ -27,12 +27,12 @@ Currently no Reporters are there. once they are in place things are ready to be 
 ## Rubygems/Bundler
 
 ```
-gem install metrics-core
+gem install leafy
 ```
 
 or Gemfile:
 ```
-gem 'metrics-core'
+gem 'leafy'
 ```
 
 ## Getting Started

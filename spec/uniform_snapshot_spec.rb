@@ -1,8 +1,8 @@
-require 'metrics/core/sliding_window_reservoir'
+require 'leafy/core/sliding_window_reservoir'
 
-RSpec.describe Metrics::Core::UniformSnapshot do
+RSpec.describe Leafy::Core::UniformSnapshot do
 
-  let(:snapshot) {  Metrics::Core::UniformSnapshot.new(5, 1, 2, 3, 4) }
+  let(:snapshot) {  Leafy::Core::UniformSnapshot.new(5, 1, 2, 3, 4) }
   let(:empty_snapshot) { subject }
   
   it 'smallQuantilesAreTheFirstValue' do
@@ -118,7 +118,7 @@ RSpec.describe Metrics::Core::UniformSnapshot do
 
   
   it 'calculatesAStdDevOfZeroForASingletonSnapshot' do
-    singleItemSnapshot = Metrics::Core::UniformSnapshot.new(1)
+    singleItemSnapshot = Leafy::Core::UniformSnapshot.new(1)
 
     expect(singleItemSnapshot.std_dev).to eq 0.0
   end

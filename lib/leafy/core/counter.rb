@@ -1,7 +1,7 @@
 require 'concurrent/thread_safe/util/adder'
 
 # An incrementing and decrementing counter metric.
-module Metrics
+module Leafy
   module Core
     class Counter
        def initialize

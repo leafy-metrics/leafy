@@ -1,10 +1,10 @@
-require 'metrics/core/timer'
+require 'leafy/core/timer'
 require 'concurrent/atomic/atomic_boolean'
 
-RSpec.describe Metrics::Core::Timer do
+RSpec.describe Leafy::Core::Timer do
 
   let(:clock) do
-    clock = Metrics::Core::Clock.new
+    clock = Leafy::Core::Clock.new
     # a mock clock that increments its ticker by 50msec per call
     def clock.tick      
       @ticks = @ticks.to_i + 50000000
@@ -14,7 +14,7 @@ RSpec.describe Metrics::Core::Timer do
 
   let(:reservoir) { double('Reservoir') }
 
-  let(:timer) {  Metrics::Core::Timer.new(reservoir, clock) }
+  let(:timer) {  Leafy::Core::Timer.new(reservoir, clock) }
 
   it 'hasRates' do
     expect(timer.count).to eq 0

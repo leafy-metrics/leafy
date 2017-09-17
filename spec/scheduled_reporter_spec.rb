@@ -1,8 +1,8 @@
-require 'metrics/core/scheduled_reporter'
+require 'leafy/core/scheduled_reporter'
 require 'concurrent/atomic/atomic_fixnum'
 
 
-RSpec.describe Metrics::Core::ScheduledReporter do
+RSpec.describe Leafy::Core::ScheduledReporter do
 
   class MetricMock
 
@@ -14,7 +14,7 @@ RSpec.describe Metrics::Core::ScheduledReporter do
     end
   end
 
-  class Metrics::Core::DummyReporter < Metrics::Core::ScheduledReporter
+  class Leafy::Core::DummyReporter < Leafy::Core::ScheduledReporter
 
     attr_reader :execution_count, :args
     def initialize(registry, name, *)#executor = nil, shutdownExecutorOnStop = false)
@@ -29,13 +29,13 @@ RSpec.describe Metrics::Core::ScheduledReporter do
     end
   end
 
-  let(:gauge) { MetricMock.new(Metrics::Core::Gauge) }
-  let(:counter) { MetricMock.new(Metrics::Core::Counter) }
-  let(:timer) { MetricMock.new(Metrics::Core::Timer) }
-  let(:histogram) { MetricMock.new(Metrics::Core::Histogram) }
-  let(:meter) { MetricMock.new(Metrics::Core::Meter) }
+  let(:gauge) { MetricMock.new(Leafy::Core::Gauge) }
+  let(:counter) { MetricMock.new(Leafy::Core::Counter) }
+  let(:timer) { MetricMock.new(Leafy::Core::Timer) }
+  let(:histogram) { MetricMock.new(Leafy::Core::Histogram) }
+  let(:meter) { MetricMock.new(Leafy::Core::Meter) }
   let(:registry) do
-    registry = Metrics::Core::MetricRegistry.new
+    registry = Leafy::Core::MetricRegistry.new
     registry.register("gauge", gauge)
     registry.register("counter", counter)
     registry.register("histogram", histogram)
@@ -46,9 +46,9 @@ RSpec.describe Metrics::Core::ScheduledReporter do
 
   let(:custom_executor) { Concurrent::SingleThreadExecutor.new }
   let(:external_executor) { Concurrent::SingleThreadExecutor.new }
-  let(:reporter) { Metrics::Core::DummyReporter.new(registry, 'example') }
-  let(:reporter_with_custom_executor) { Metrics::Core::DummyReporter.new(registry, 'example', custom_executor) }
-  let(:reporter_with_externally_managed_executor) { Metrics::Core::DummyReporter.new(registry, 'example', external_executor, false) }
+  let(:reporter) { Leafy::Core::DummyReporter.new(registry, 'example') }
+  let(:reporter_with_custom_executor) { Leafy::Core::DummyReporter.new(registry, 'example', custom_executor) }
+  let(:reporter_with_externally_managed_executor) { Leafy::Core::DummyReporter.new(registry, 'example', external_executor, false) }
   let(:reporters) { [reporter, reporter_with_custom_executor,
                      reporter_with_externally_managed_executor] }
 

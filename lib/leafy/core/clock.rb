@@ -1,5 +1,5 @@
 # An abstraction for how time passes. It is passed to {@link Timer} to track timing.
-module Metrics
+module Leafy
   module Core
     class Clock 
       # Returns the current time tick.

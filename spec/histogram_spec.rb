@@ -1,6 +1,6 @@
-require 'metrics/core/histogram'
+require 'leafy/core/histogram'
 
-RSpec.describe Metrics::Core::Histogram do
+RSpec.describe Leafy::Core::Histogram do
 
   let(:reservoir) do
     reservoir = double('Reservoir')
@@ -8,7 +8,7 @@ RSpec.describe Metrics::Core::Histogram do
     reservoir
   end
 
-  let(:histogram) {  Metrics::Core::Histogram.new(reservoir) }
+  let(:histogram) {  Leafy::Core::Histogram.new(reservoir) }
 
   it 'updatesTheCountOnUpdates' do
     expect(histogram.count).to eq 0

@@ -2,7 +2,7 @@ require 'concurrent/thread_safe/util/cheap_lockable'
 require 'concurrent'
 require_relative 'metric_registry'
 
-module Metrics
+module Leafy
   module Core
     class ScheduledReporter
       include Concurrent::ThreadSafe::Util::CheapLockable

@@ -1,4 +1,4 @@
-module Metrics
+module Leafy
   module Core
 
     # A statistical snapshot of a {@link Snapshot}.

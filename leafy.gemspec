@@ -1,15 +1,15 @@
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "metrics/core/version"
+require "leafy/core/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "metrics-core"
-  spec.version       = Metrics::Core::VERSION
+  spec.name          = "leafy"
+  spec.version       = Leafy::Core::VERSION
   spec.authors       = [""]
   spec.email         = [""]
   spec.summary       = "Port of Dropwizards metrics-core to pure ruby"
   spec.description   = spec.summary
-  spec.homepage      = "https://github.com/mkristian/metrics-core"
+  spec.homepage      = "https://github.com/leafy-metrics/leafy"
   spec.license       = "APL2"
 
   spec.files         = `git ls-files -z`.split("\x0")
