@@ -58,7 +58,7 @@ module Leafy
                     histograms,
                     meters,
                     timers)
-        dateTime = Time.at(@clock.time / 1000000.0)
+        dateTime = Time.at(@clock.time / 1000000.0).utc
         printWithBanner(dateTime.to_s, '=');
         output.puts
 
