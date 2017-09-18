@@ -13,8 +13,6 @@ module Leafy
     class EWMA
       extend Concurrent::ThreadSafe::Util::Volatile
       
-      private
-
       INTERVAL = 5 # 5 nanos
       FIVE_NANOS = INTERVAL * 1000000000.0 # 5 nanos
       ONE_NANOS = 1000000000.0 # 1 nanos
@@ -22,11 +20,9 @@ module Leafy
       ONE_MINUTE = 1
       FIVE_MINUTES = 5
       FIFTEEN_MINUTES = 15
-      M1_ALPHA = 1 - Math.exp(-INTERVAL / SECONDS_PER_MINUTE / ONE_MINUTE);
-      M5_ALPHA = 1 - Math.exp(-INTERVAL / SECONDS_PER_MINUTE / FIVE_MINUTES);
-      M15_ALPHA = 1 - Math.exp(-INTERVAL / SECONDS_PER_MINUTE / FIFTEEN_MINUTES);
-
-      public
+      M1_ALPHA = 1 - Math.exp(-INTERVAL / SECONDS_PER_MINUTE / ONE_MINUTE)
+      M5_ALPHA = 1 - Math.exp(-INTERVAL / SECONDS_PER_MINUTE / FIVE_MINUTES)
+      M15_ALPHA = 1 - Math.exp(-INTERVAL / SECONDS_PER_MINUTE / FIFTEEN_MINUTES)
 
       # Creates a new EWMA which is equivalent to the UNIX one minute load average and which expects
       # to be ticked every 5 seconds.

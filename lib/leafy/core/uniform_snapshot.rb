@@ -17,7 +17,7 @@ module Leafy
       # @param quantile a given quantile, in {@code [0..1]}
       # @return the value in the distribution at {@code quantile}
       def value(quantile)
-        if quantile < 0.0 || quantile > 1.0 || !quantile.is_a?(Float)
+        if quantile < 0.0 || quantile > 1.0
             raise ArgumentError.new("#{quantile} is not in [0..1]")
         end
 
@@ -53,7 +53,6 @@ module Leafy
       #
       # @return the highest value
       #/
-      @Override
       def max
         return 0 if @values.empty?
         @values.last

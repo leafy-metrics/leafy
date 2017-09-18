@@ -8,7 +8,7 @@ module Leafy
       #
       # @param quantile a given quantile, in {@code [0..1]}
       # @return the value in the distribution at {@code quantile}
-      def value(quantile)
+      def value(_quantile)
         raise 'not implemented'
       end
 

@@ -25,7 +25,6 @@ module Leafy
        # Returns the counter's current value.
        #
        # @return the counter's current value
-       @Override
        def count
          @count.sum
        end

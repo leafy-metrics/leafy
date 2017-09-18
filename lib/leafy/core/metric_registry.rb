@@ -150,6 +150,22 @@ module Leafy
         end
       end
       
+      def getOrAdd(name, builder)
+        metric = @metrics[name]
+        if builder.instance?(metric)
+          return metric
+        elsif metric.nil?
+          begin
+            return register(name, builder.new_metric)
+          rescue ArgumentError
+            added = @metrics[name]
+            return added if builder.instance?(added)  
+          end
+        end
+        raise ArgumentError.new("#{name} is already used for a different type of metric")
+      end
+      private :getOrAdd
+      
       # A quick and easy way of capturing the notion of default metrics.
       class Builder
         def initialize(klass, &block)
@@ -190,26 +206,8 @@ module Leafy
           end
         end
       end
-
-      private
-      def getOrAdd(name, builder)
-        metric = @metrics[name]
-        if builder.instance?(metric)
-          return metric
-        else if metric.nil?
-          begin
-            return register(name, builder.new_metric)
-          rescue ArgumentError
-            added = @metrics[name]
-            if builder.instance?(added)
-              return added
-            end
-          end
-        end
-        raise ArgumentError.new("#{name} is already used for a different type of metric")
-      end
-
+      
     end
   end
 end
-end
+

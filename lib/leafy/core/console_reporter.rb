@@ -53,6 +53,18 @@ module Leafy
         @clock = clock || Clock.default_clock
       end
 
+      def print_report(metric, name, print_method)
+        unless metric.empty?
+          printWithBanner("-- #{name}", '-')
+          metric.each do |k,v|
+            output.puts(k)
+            print_method.call(v)
+          end
+          output.puts
+        end
+      end
+      private :print_report
+
       def do_report(gauges,
                     counters,
                     histograms,
@@ -62,50 +74,11 @@ module Leafy
         printWithBanner(dateTime.to_s, '=');
         output.puts
 
-        unless gauges.empty?
-          printWithBanner("-- Gauges", '-')
-          gauges.each do |k,v|
-            output.puts(k)
-            printGauge(v)
-          end
-          output.puts
-        end
-
-        unless counters.empty?
-          printWithBanner("-- Counters", '-')
-          counters.each do |k,v|
-            output.puts(k)
-            printCounter(v)
-          end
-          output.puts
-        end
-
-        unless histograms.empty?
-          printWithBanner("-- Histograms", '-')
-          histograms.each do |k,v|
-            output.puts(k)
-            printHistogram(v)
-          end
-          output.puts
-        end
-
-        unless meters.empty?
-          printWithBanner("-- Meters", '-')
-          meters.each do |k,v|
-            output.puts(k)
-            printMeter(v)
-          end
-          output.puts
-        end
-
-        unless timers.empty?
-          printWithBanner("-- Timers", '-')
-          timers.each do |k,v|
-            output.puts(k)
-            printTimer(v)
-          end
-          output.puts
-        end
+        print_report(gauges, 'Gauges', method(:printGauge))
+        print_report(counters, 'Counters', method(:printCounter))
+        print_report(histograms, 'Histograms', method(:printHistogram))
+        print_report(meters, 'Meters', method(:printMeter))
+        print_report(timers, 'Timers', method(:printTimer))
 
         output.puts
         output.flush

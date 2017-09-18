@@ -12,7 +12,7 @@ module Leafy
       end
 
       #FACTORY_ID = Concurrent::AtomicFixnum.new
-      def self.createDefaultExecutor(name)
+      def self.createDefaultExecutor(_name)
         Concurrent::SingleThreadExecutor.new
         #return Executors.newSingleThreadScheduledExecutor(new NamedThreadFactory(name + '-' + FACTORY_ID.incrementAndGet()));
       end
@@ -50,7 +50,7 @@ module Leafy
 
       # obserer callback from scheduled task used to trigger the task for the
       # next report
-      def update(time, value, reason)
+      def update(_time, _value, reason)
         return if reason.is_a? Concurrent::CancelledOperationError
         cheap_synchronize do
           raise ArgumentError.new("Reporter not started started") unless @scheduledFuture
@@ -123,11 +123,11 @@ module Leafy
       # @param histograms all of the histograms in the registry
       # @param meters     all of the meters in the registry
       # @param timers     all of the timers in tdhe registry
-      def do_report(gauges,
-                    counters,
-                    histograms,
-                    meters,
-                    timers)
+      def do_report(_gauges,
+                    _counters,
+                    _histograms,
+                    _meters,
+                    _timers)
         raise 'not implemented'
       end
     
