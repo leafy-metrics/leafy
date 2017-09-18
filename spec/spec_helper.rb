@@ -1,4 +1,6 @@
 require 'pry'
+require 'coveralls'
+Coveralls.wear!
 
 class Number
 

@@ -11,7 +11,7 @@
 [![Build Status](https://travis-ci.org/leafy-metrics/leafy.svg?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/badges/github.com/leafy-metrics/leafy.svg)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/leafy-metrics/leafy/badges/gpa.svg)][codeclimate]
-[![Test Coverage](https://codeclimate.com/github/leafy-metrics/leafy/badges/coverage.svg)][coveralls]
+[![Coverage Status](https://coveralls.io/repos/github/leafy-metrics/leafy/badge.svg?branch=master)][coveralls]
 [![Issue Count](https://codeclimate.com/github/leafy-metrics/leafy/badges/issue_count.svg)][codeissues]
 
 This is literal port of [http://metrics.dropwizard.io/3.1.0/](http://metrics.dropwizard.io/3.1.0/). as the naming convention of Java is slightly different some internal variable names still following the Java naming convention. all public method names are using Ruby naming conventions.
