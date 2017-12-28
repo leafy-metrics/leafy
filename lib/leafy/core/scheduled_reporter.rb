@@ -11,6 +11,10 @@ module Leafy
         @logger ||= logger || (require 'logger'; Logger.new(STDERR))
       end
 
+      def logger
+        self.class.logger
+      end
+
       #FACTORY_ID = Concurrent::AtomicFixnum.new
       def self.createDefaultExecutor(_name)
         Concurrent::SingleThreadExecutor.new
@@ -21,12 +25,14 @@ module Leafy
         super() # for cheap_lockable
         @registry  = registry;
         @executor = executor.nil? ? self.class.createDefaultExecutor(name) : executor
-        @shutdownExecutorOnStop = shutdownExecutorOnStop;
+        @shutdownExecutorOnStop = shutdownExecutorOnStop
         @rateFactor = 1.0
         @durationFactor = 1000000.0
       end
 
       class ReportedTask
+
+        attr_reader :period
 
         def initialize(reporter, start, period)
           @reporter = reporter
@@ -45,7 +51,11 @@ module Leafy
         def task(task = nil)
           @task ||= task
         end
-      end
+
+        def to_s
+          "start: #{Time.at(@start).utc} period: #{@period}"
+        end
+       end
 
 
       # obserer callback from scheduled task used to trigger the task for the
@@ -70,7 +80,7 @@ module Leafy
           raise ArgumentError.new("Reporter already started") if @scheduledFuture
           start = Concurrent.monotonic_time + initial_delay
 
-          @scheduledFuture = ReportedTask.new(self, start, period) 
+          @scheduledFuture = ReportedTask.new(self, start, period)
           task = Concurrent::ScheduledTask.new(initial_delay, executor: @executor, &@scheduledFuture.method(:call))
           task.add_observer(self)
           @scheduledFuture.task(task)
@@ -89,7 +99,7 @@ module Leafy
             @executor.shutdown # Cancel currently executing tasks
             # Wait a while for tasks to respond to being cancelled
             unless @executor.wait_for_termination(1)
-              puts "#{self.class.name}: ScheduledExecutorService did not terminate"
+              logger.warn "#{self.class.name}: ScheduledExecutorService did not terminate"
             end
           end
         else
@@ -102,7 +112,7 @@ module Leafy
           end
         end
       end
-    
+
       # Report the current values of all metrics in the registry.
       def report
         cheap_synchronize do
@@ -113,7 +123,7 @@ module Leafy
             @registry.timers)
         end
       rescue => ex
-        self.class.logger.error("Exception thrown from #{self.class.name}#report. Exception was suppressed: #{ex.message}")
+        logger.error("Exception thrown from #{self.class.name}#report. Exception was suppressed: #{ex.message}", e)
       end
 
       # Called periodically by the polling thread. Subclasses should report all the given metrics.
@@ -130,13 +140,13 @@ module Leafy
                     _timers)
         raise 'not implemented'
       end
-    
+
 
       def rate_unit
         'second'
       end
       protected :rate_unit
-      
+
       def duration_unit
         'milliseconds'
       end
@@ -151,6 +161,10 @@ module Leafy
         rate * @rateFactor
       end
       protected :convert_rate
+
+      def to_s
+        "#{self.class}: #{@scheduledFuture}"
+      end
     end
   end
 end

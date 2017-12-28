@@ -36,23 +36,23 @@ module Leafy
         n
       end
 
-      
+
       def count
         @count.sum
       end
 
-      
+
       def fifteen_minute_rate
         tickIfNecessary
         @m15Rate.rate
       end
 
-      
+
       def five_minute_rate
         tickIfNecessary
         @m5Rate.rate
       end
-      
+
 
       def one_minute_rate
         tickIfNecessary

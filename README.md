@@ -7,7 +7,7 @@
 
 # Port of Dropwizard Metrics-Core
 
-[![Gem Version](https://badge.fury.io/rb/metrics-code.svg)][gem]
+[![Gem Version](https://badge.fury.io/rb/leafy.svg)][gem]
 [![Build Status](https://travis-ci.org/leafy-metrics/leafy.svg?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/badges/github.com/leafy-metrics/leafy.svg)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/leafy-metrics/leafy/badges/gpa.svg)][codeclimate]
@@ -37,7 +37,45 @@ gem 'leafy'
 
 ## Getting Started
 
-TBD
+
+``` Ruby
+registry = Leafy::Core::MetricRegistry.new
+meter = registry.meter('throughput')
+
+reporter = Leafy::Core::ConsoleReporter::Builder.for_registry(registry) do
+  output_to STDERR
+  shutdown_executor_on_stop true
+end
+reporter.start(0, 10) # no initial_delay, report any 10 seconds
+
+meter.mark(10)
+
+```
+
+use `irb -rleafy/core/metric_registry -rleafy/core/console_reporter` to start irb and copy and paste above code snippet.
+
+## Note on spawning processes
+
+``` Ruby
+registry = Leafy::Core::MetricRegistry.new
+meter = registry.meter('throughput')
+
+Process.fork do
+  reporter = Leafy::Core::ConsoleReporter::Builder.for_registry(registry) do
+    output_to STDOUT
+    shutdown_executor_on_stop true
+  end
+  reporter.start(0, 10) # no initial_delay, report any 10 seconds
+  while true; end
+end
+
+meter.mark(10)
+
+```
+
+Here the reporter runs in different process and can not see the values on the meter changed by main process.
+
+See [Puma cluster config](puma.rb) for an example configuration of puma.
 
 ## Misssing Bits from Dropwizard
 

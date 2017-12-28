@@ -1,16 +1,25 @@
-# A gauge which measures the ratio of one value to another.
-#
-# If the denominator is zero, not a number, or infinite, the resulting ratio is not a number.
+# A gauge.
 module Leafy
   module Core
     class Gauge
-      
+      include Concurrent::Synchronization::Volatile
+
+      attr_volatile :val
+
       def initialize(&block)
-        @block = block || raise(AgumentError.new('missing block'))
+        @block = block
+      end
+
+      def value=(v)
+        self.val = v
       end
 
       def value
-        @block.call
+        if @block
+          @block.call
+        else
+          self.val
+        end
       end
     end
   end

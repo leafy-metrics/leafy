@@ -5,8 +5,14 @@ module Leafy
     class ConsoleReporter < ScheduledReporter
 
       class Builder
-        def self.for_registry(registry)
-          new(registry)
+        def self.for_registry(registry, &block)
+          result = new(registry)
+          if block_given?
+            result.instance_eval(&block)
+            result.build
+          else
+            result
+          end
         end
 
         def initialize(registry)
